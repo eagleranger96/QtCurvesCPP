@@ -57,12 +57,34 @@ void MainWindow::on_btnLine_clicked()
     update_ui();
 }
 
+void MainWindow::on_btnStarfish_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Starfish);
+    this->ui->renderArea->repaint();
+    update_ui();
+}
+
+void MainWindow::on_btnEllipse_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Ellipse);
+    this->ui->renderArea->repaint();
+    update_ui();
+}
+
 void MainWindow::on_btnCircle_clicked()
 {
     this->ui->renderArea->setShape(RenderArea::Circle);
     this->ui->renderArea->repaint();
     update_ui();
 }
+
+void MainWindow::on_btnFancy_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Fancy);
+    this->ui->renderArea->repaint();
+    update_ui();
+}
+
 
 void MainWindow::on_spinScale_valueChanged(double scale)
 {

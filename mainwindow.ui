@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>337</width>
-    <height>263</height>
+    <height>290</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,9 +91,30 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="btnStarfish">
+        <property name="text">
+         <string>Starfish</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnEllipse">
+        <property name="text">
+         <string>Ellipse</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="btnCircle">
         <property name="text">
          <string>Circle</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnFancy">
+        <property name="text">
+         <string>Fancy</string>
         </property>
        </widget>
       </item>

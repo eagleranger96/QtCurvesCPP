@@ -50,10 +50,29 @@ void RenderArea::on_shape_changed() {
         mScale = 100; // line length in pixels
         mStepCount = 128;
         break;
+
+    case Starfish:
+        mScale = 25;
+        mIntervalLength = 6 * M_PI;
+        mStepCount = 256;
+        break;
+
+    case Ellipse:
+        mStepCount = 256;
+        mIntervalLength = 2 * M_PI;
+        mScale = 75;
+        break;
+
     case Circle:
         mScale = 165;
         mIntervalLength = 2 * M_PI;
         mStepCount = 128;
+        break;
+
+    case Fancy:
+        mIntervalLength = 12 * M_PI;
+        mStepCount = 512;
+        mScale = 10;
         break;
 
     default:
@@ -81,9 +100,22 @@ QPointF RenderArea::compute(float t) {
 
     case Line:
         return compute_line(t);
+        break;
+
+    case Starfish:
+        return compute_starfish(t);
+        break;
+
+    case Ellipse:
+        return compute_ellipse(t);
+        break;
 
     case Circle:
         return compute_circle(t);
+        break;
+
+    case Fancy:
+        return compute_fancy(t);
         break;
 
     default:
@@ -125,8 +157,34 @@ QPointF RenderArea::compute_line(float t) {
     return QPointF(1-t, 1-t);
 }
 
+QPointF RenderArea::compute_starfish(float t) {
+    float R = 5.0f;
+    float r = 3.0f;
+    float d = 5.0f;
+
+    float x = (R - r) * cos(t) + d * cos(t * ((R-r) / r));
+    float y = (R - r) * sin(t) - d * sin(t * ((R-r) / r));
+
+    return QPointF(x,y);
+}
+
+QPointF RenderArea::compute_ellipse(float t) {
+    float a = 2.0f;
+    float b = 1.1f;
+    return QPointF(
+                a * cos(t),
+                b * sin(t)
+    );
+}
+
 QPointF RenderArea::compute_circle(float t) {
     return QPointF(cos(t), sin(t));
+}
+
+QPointF RenderArea::compute_fancy(float t) {
+    float x = 11.0f * cos(t) - 6 * cos((11.0f / 6.0f) * t);
+    float y = 11.0f * sin(t) - 6 * sin((11.0f / 6.0f) * t);
+    return QPointF(x,y);
 }
 
 void RenderArea::paintEvent(QPaintEvent *event) {
@@ -160,4 +218,12 @@ void RenderArea::paintEvent(QPaintEvent *event) {
 
         prevPixel = pixel;
     }
+
+    QPointF point = compute(mIntervalLength);
+
+    QPoint pixel;
+    pixel.setX(point.x() * mScale + center.x());
+    pixel.setY(point.y() * mScale + center.y());
+
+    painter.drawLine(pixel, prevPixel);
 }
