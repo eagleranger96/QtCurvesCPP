@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>337</width>
-    <height>290</height>
+    <width>539</width>
+    <height>408</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -115,6 +115,20 @@
        <widget class="QPushButton" name="btnFancy">
         <property name="text">
          <string>Fancy</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnCloud">
+        <property name="text">
+         <string>Cloud 1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnCloud2">
+        <property name="text">
+         <string>Cloud 2</string>
         </property>
        </widget>
       </item>

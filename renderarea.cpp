@@ -76,6 +76,18 @@ void RenderArea::on_shape_changed() {
         mScale = 10;
         break;
 
+    case Cloud1:
+        mScale = 10;
+        mIntervalLength = 28 * M_PI;
+        mStepCount = 128;
+        break;
+
+    case Cloud2:
+        mScale = 10;
+        mIntervalLength = 28 * M_PI;
+        mStepCount = 128;
+        break;
+
     default:
         break;
     }
@@ -117,6 +129,14 @@ QPointF RenderArea::compute(float t) {
 
     case Fancy:
         return compute_fancy(t);
+        break;
+
+    case Cloud1:
+        return compute_cloud1(t);
+        break;
+
+    case Cloud2:
+        return compute_cloud2(t);
         break;
 
     default:
@@ -185,6 +205,24 @@ QPointF RenderArea::compute_circle(float t) {
 QPointF RenderArea::compute_fancy(float t) {
     float x = 11.0f * cos(t) - 6 * cos((11.0f / 6.0f) * t);
     float y = 11.0f * sin(t) - 6 * sin((11.0f / 6.0f) * t);
+    return QPointF(x,y);
+}
+
+QPointF RenderArea::compute_cloud1(float t) {
+    return compute_cloud_with_sign(t,-1);
+}
+
+QPointF RenderArea::compute_cloud2(float t) {
+    return compute_cloud_with_sign(t,1);
+}
+
+QPointF RenderArea::compute_cloud_with_sign(float t, float sign) {
+    float a = 14;
+    float b = 1;
+
+    float x = (a + b) * cos(t * b / a) + sign * b * cos(t * (a + b) / a);
+    float y = (a + b) * sin(t * b / a) - b * sin(t * (a + b) / a);
+
     return QPointF(x,y);
 }
 
